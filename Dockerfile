@@ -1,6 +1,8 @@
-FROM alpine:3.15
+FROM alpine:3
 
-ENV ANSIBLE_VERSION 2.9.16
+ARG ANSIBLE_VERSION=2.9.16
+
+ENV ANSIBLE_VERSION $ANSIBLE_VERSION
 
 ENV BUILD_PACKAGES \
   bash \
@@ -8,20 +10,17 @@ ENV BUILD_PACKAGES \
   tar \
   openssh-client \
   sshpass \
+  rsync \
   git \
-  python \
-  py-boto \
-  py-dateutil \
-  py-httplib2 \
-  py-jinja2 \
-  py-paramiko \
-  py-pip \
-  py-yaml \
+  python3 \
+  py3-boto \
+  py3-dateutil \
+  py3-httplib2 \
+  py3-jinja2 \
+  py3-paramiko \
+  py3-pip \
+  py3-yaml \
   ca-certificates
-
-# If installing ansible@testing
-#RUN \
-#	echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> #/etc/apk/repositories
 
 RUN set -x && \
     \
@@ -31,10 +30,7 @@ RUN set -x && \
       musl-dev \
       libffi-dev \
       openssl-dev \
-      python-dev && \
-    \
-    echo "==> Upgrading apk and system..."  && \
-    apk update && apk upgrade && \
+      python3-dev && \
     \
     echo "==> Adding Python runtime..."  && \
     apk add --no-cache ${BUILD_PACKAGES} && \
@@ -52,8 +48,6 @@ RUN set -x && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
-
-RUN apk add --update --no-cache rsync
 
 ENV ANSIBLE_GATHERING smart
 ENV ANSIBLE_HOST_KEY_CHECKING false
