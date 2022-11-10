@@ -1,4 +1,4 @@
-FROM alpine:3
+FROM alpine:20221110
 
 ARG ANSIBLE_VERSION=2.9.16
 
