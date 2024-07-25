@@ -4,24 +4,6 @@ ARG ANSIBLE_VERSION=10.2.0
 
 ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
 
-ENV BUILD_PACKAGES \
-  bash \
-  curl \
-  tar \
-  openssh-client \
-  sshpass \
-  rsync \
-  git \
-  python3 \
-  py3-boto3 \
-  py3-dateutil \
-  py3-httplib2 \
-  py3-jinja2 \
-  py3-paramiko \
-  py3-pip \
-  py3-yaml \
-  ca-certificates
-
 RUN set -x && \
     \
     echo "==> Adding build-dependencies..."  && \
@@ -33,7 +15,23 @@ RUN set -x && \
       python3-dev && \
     \
     echo "==> Adding Python runtime..."  && \
-    apk add --no-cache ${BUILD_PACKAGES} && \
+    apk add --no-cache  bash \
+        curl \
+        tar \
+        openssh-client \
+        sshpass \
+        rsync \
+        git \
+        python3 \
+        py3-boto3 \
+        py3-dateutil \
+        py3-httplib2 \
+        py3-jinja2 \
+        py3-paramiko \
+        py3-pip \
+        py3-yaml \
+        ca-certificates \
+    && \
     pip install --upgrade pip && \
     pip install python-keyczar docker-py && \
     \
