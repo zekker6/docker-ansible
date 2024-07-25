@@ -32,12 +32,11 @@ RUN set -x && \
         py3-yaml \
         ca-certificates \
     && \
-    echo "==> Installing Ansible..."  && \
-    pip install ansible==${ANSIBLE_VERSION} && \
+    pip install --upgrade pip && \
+    pip install python-keyczar docker-py && \
     \
-    echo "==> Cleaning up..."  && \
-    apk del build-dependencies && \
-    rm -rf '/var/cache/apk/*'
+    echo "==> Installing Ansible..."  && \
+    pip install ansible==${ANSIBLE_VERSION}
 
 ENV ANSIBLE_GATHERING smart
 ENV ANSIBLE_HOST_KEY_CHECKING false
