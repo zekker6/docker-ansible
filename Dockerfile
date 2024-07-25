@@ -29,7 +29,15 @@ RUN set -x && \
         py3-jinja2 \
         py3-paramiko \
         py3-pip \
-        py3-yaml
+        py3-yaml \
+        ca-certificates \
+    && \
+    echo "==> Installing Ansible..."  && \
+    pip install ansible==${ANSIBLE_VERSION} && \
+    \
+    echo "==> Cleaning up..."  && \
+    apk del build-dependencies && \
+    rm -rf '/var/cache/apk/*'
 
 ENV ANSIBLE_GATHERING smart
 ENV ANSIBLE_HOST_KEY_CHECKING false
