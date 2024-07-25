@@ -2,7 +2,7 @@ FROM alpine:3
 
 ARG ANSIBLE_VERSION=2.9.16
 
-ENV ANSIBLE_VERSION $ANSIBLE_VERSION
+ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
 
 ENV BUILD_PACKAGES \
   bash \
@@ -13,7 +13,7 @@ ENV BUILD_PACKAGES \
   rsync \
   git \
   python3 \
-  py3-boto \
+  py3-boto3 \
   py3-dateutil \
   py3-httplib2 \
   py3-jinja2 \
@@ -49,14 +49,14 @@ RUN set -x && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
 
-ENV ANSIBLE_GATHERING smart
-ENV ANSIBLE_HOST_KEY_CHECKING false
-ENV ANSIBLE_RETRY_FILES_ENABLED false
-ENV ANSIBLE_ROLES_PATH /ansible/playbooks/roles
-ENV ANSIBLE_SSH_PIPELINING True
-ENV PYTHONPATH /ansible/lib
-ENV PATH /ansible/bin:$PATH
-ENV ANSIBLE_LIBRARY /ansible/library
+ENV ANSIBLE_GATHERING=smart
+ENV ANSIBLE_HOST_KEY_CHECKING=false
+ENV ANSIBLE_RETRY_FILES_ENABLED=false
+ENV ANSIBLE_ROLES_PATH=/ansible/playbooks/roles
+ENV ANSIBLE_SSH_PIPELINING=True
+ENV PYTHONPATH=/ansible/lib
+ENV PATH=/ansible/bin:$PATH
+ENV ANSIBLE_LIBRARY=/ansible/library
 
 WORKDIR /ansible/playbooks
 
