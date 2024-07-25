@@ -34,10 +34,8 @@ RUN set -x && \
     && \
     pip install --upgrade pip && \
     pip install python-keyczar docker-py && \
-    \
     echo "==> Installing Ansible..."  && \
     pip install ansible==$ANSIBLE_VERSION && \
-    \
     echo "==> Cleaning up..."  && \
     apk del build-dependencies && \
     rm -rf '/var/cache/apk/*'
