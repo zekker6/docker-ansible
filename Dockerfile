@@ -36,7 +36,11 @@ RUN set -x && \
     pip install python-keyczar docker-py && \
     \
     echo "==> Installing Ansible..."  && \
-    pip install ansible==${ANSIBLE_VERSION}
+    pip install ansible==$ANSIBLE_VERSION && \
+    \
+    echo "==> Cleaning up..."  && \
+    apk del build-dependencies && \
+    rm -rf '/var/cache/apk/*'
 
 ENV ANSIBLE_GATHERING smart
 ENV ANSIBLE_HOST_KEY_CHECKING false
