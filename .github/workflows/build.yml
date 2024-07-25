@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-  create:
-    tags:
-      - v*
+      - ci/testing
 
 permissions:
   contents: read

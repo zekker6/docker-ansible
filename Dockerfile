@@ -32,24 +32,24 @@ RUN set -x && \
         py3-yaml \
         ca-certificates \
     && \
-    pip install --upgrade pip && \
-    pip install python-keyczar docker-py && \
+    pip install --break-system-packages --upgrade pip && \
+    pip install --break-system-packages python-keyczar docker-py && \
     \
     echo "==> Installing Ansible..."  && \
-    pip install ansible==${ANSIBLE_VERSION} && \
+    pip install --break-system-packages ansible==${ANSIBLE_VERSION} && \
     \
     echo "==> Cleaning up..."  && \
     apk del build-dependencies && \
-    rm -rf /var/cache/apk/*
+    rm -rf '/var/cache/apk/*'
 
-ENV ANSIBLE_GATHERING=smart
-ENV ANSIBLE_HOST_KEY_CHECKING=false
-ENV ANSIBLE_RETRY_FILES_ENABLED=false
-ENV ANSIBLE_ROLES_PATH=/ansible/playbooks/roles
-ENV ANSIBLE_SSH_PIPELINING=True
-ENV PYTHONPATH=/ansible/lib
-ENV PATH=/ansible/bin:$PATH
-ENV ANSIBLE_LIBRARY=/ansible/library
+ENV ANSIBLE_GATHERING smart
+ENV ANSIBLE_HOST_KEY_CHECKING false
+ENV ANSIBLE_RETRY_FILES_ENABLED false
+ENV ANSIBLE_ROLES_PATH /ansible/playbooks/roles
+ENV ANSIBLE_SSH_PIPELINING True
+ENV PYTHONPATH /ansible/lib
+ENV PATH /ansible/bin:$PATH
+ENV ANSIBLE_LIBRARY /ansible/library
 
 WORKDIR /ansible/playbooks
 
