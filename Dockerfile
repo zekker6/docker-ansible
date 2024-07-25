@@ -29,18 +29,7 @@ RUN set -x && \
         py3-jinja2 \
         py3-paramiko \
         py3-pip \
-        py3-yaml \
-        ca-certificates \
-    && \
-    pip install --upgrade pip && \
-    pip install python-keyczar docker-py && \
-    \
-    echo "==> Installing Ansible..."  && \
-    pip install ansible==${ANSIBLE_VERSION} && \
-    \
-    echo "==> Cleaning up..."  && \
-    apk del build-dependencies && \
-    rm -rf '/var/cache/apk/*'
+        py3-yaml
 
 ENV ANSIBLE_GATHERING smart
 ENV ANSIBLE_HOST_KEY_CHECKING false
